@@ -1,2 +1,2 @@
 # bomberman
-HTML5 Bomberman Game
+HTML5 Bomberman Game :)
