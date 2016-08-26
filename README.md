@@ -1,4 +1,4 @@
-# bomberman
+# Bomberman
 HTML5 Bomberman Game :)
 
 Techno :
