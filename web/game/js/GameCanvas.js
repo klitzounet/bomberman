@@ -5,7 +5,7 @@ define([
 
 
     var MOVE_ANIM_SPEED = 0.1;
-    var FLAME_ANIM_SPEED = 0.15;
+    var FLAME_ANIM_SPEED = 0.05;
     var BOMB_ANIM_SPEED = 0.1;
 
     var SQUARE_SIZE = 16;
