@@ -9,7 +9,7 @@
             timePlaced: 0,
             timeTrigger: 0,
             fuseTime: 2500,
-            strength: 4,
+            strength: 2,
             owner: 0
         }
     });

@@ -51,7 +51,7 @@
 
             // check bombs
             this.bombs.each(function(b) {
-                if (b.get('timeTrigger')<=now) {
+                if (b && b.get('timeTrigger')<=now) {
                     this.explodeBomb(b);
                 }
             }, this);
@@ -104,8 +104,51 @@
             _.each(this.blocks, function(b) {
                 this.map.setAbsMap(b.x, b.y, TILE_EMPTY, false);
             }, this);
+            this.bonus = this.generateBonus(this.blocks);
+            
+            // generate bonus random
 
             this.endpoint.emit('break-tiles', this.blocks);
+            this.endpoint.emit('bonus', this.bonus);
+        },
+
+        generateBonus: function (explodedBlocks) {
+            var bonus = [{
+                name: 'speed',
+                prob: 0.2
+            }/*,{
+                name: 'flame',
+                prob: 0.2
+            },{
+                name: 'bomb',
+                prob: 0.2
+            },{
+                name: 'death',
+                prob: 0.2
+            }*/];
+            
+            var generatedBonus = [];
+
+            // for each block, generate randomly bonus
+            for (var b = 0 ; b < explodedBlocks.length; b++) {
+                var random = Math.random();
+                var acc = 0;
+                var selectedBonus = null;
+                for (var i = 0 ; i < bonus.length; i++) {
+                    acc += bonus[i].prob;
+                    if (random < acc) {
+                        selectedBonus = bonus[i].name;
+                        break;
+                    }
+                }
+
+                if (selectedBonus) {
+                    generatedBonus.push({x: explodedBlocks[b].x,
+                                         y: explodedBlocks[b].y,
+                                         type: selectedBonus});
+                }
+            }
+            return generatedBonus;
         },
 
         /**

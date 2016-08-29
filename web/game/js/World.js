@@ -8,7 +8,8 @@ define([
     "Flame",
     "Character",
 
-    "GameCanvas"
+    "GameCanvas",
+    "Bonus"
 ],function($, _, Backbone, core) {
 
 
@@ -27,6 +28,8 @@ define([
     });
 
     BombsCollection = Backbone.Collection.extend({});
+
+    BonusCollection = Backbone.Collection.extend({});
 
     BreakersCollection = Backbone.Collection.extend({
         initialize: function() {
@@ -73,6 +76,8 @@ define([
 
         /** bombs */
         bombs: new BombsCollection,
+        /** bonus */
+        bonus: new BonusCollection,
         /** queue of bombs to be placed */
         placeBombs: new BombsCollection,
 
@@ -163,6 +168,12 @@ define([
             this.map.setBomb(b.get('x'), b.get('y'), null);
         },
 
+        onBonusRemoved: function (bonus) {
+            console.log(this.bonus);
+            this.bonus.remove(bonus);
+            console.log(this.bonus);
+        },
+
         onFlameRemoved: function(f) {
             this.map.setFlame(f.get('x'), f.get('y'), null);
         },
@@ -171,6 +182,7 @@ define([
 
             this.players.each(function(p) { p.update(dt); });
             this.bombs.each(function(b) { b.update(dt); });
+            this.bonus.each(function(b) { b.update(dt); });
             this.flames.each(function(f) { f.update(dt); });
             this.breakings.each(function(b) { b.update(dt); });
 

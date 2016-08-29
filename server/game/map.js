@@ -54,8 +54,8 @@
 
     Map = Backbone.Model.extend({
         defaults: {
-            width: 50,
-            height: 40,
+            width: 40,
+            height: 25,
             x: 5,
             y: 3
         },

@@ -8,7 +8,8 @@
         defaults: {
             alive: false,
             spawnAt: 0,
-            score: 0
+            score: 0,
+            playerSpeed: 5 // default speed 5 square per second
         },
 
         initialize: function() {
@@ -61,6 +62,7 @@
             this.socket.on('dead', _.bind(this.onDead, this));
             this.socket.on('disconnect', _.bind(this.onDisconnect, this));
             this.socket.on('put-bomb', _.bind(this.onPlaceBomb, this));
+            this.socket.on('remove-bonus', _.bind(this.onRemoveBonus, this));
             this.socket.on('chat', _.bind(this.onChat, this));
             this.socket.on('pong', _.bind(this.onPong, this));
 
@@ -124,6 +126,10 @@
             } else {
                 console.log('A bomb at ' + d.x + ", " + d.y + " already exists!");
             }
+        },
+
+        onRemoveBonus: function (iBonus) {
+            this.endpoint.emit('remove-bonus', iBonus);
         },
 
         onChat: function(d) {

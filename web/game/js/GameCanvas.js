@@ -72,6 +72,8 @@ define([
             this.world.flames.each(_.bind(this.drawFlame, this));
 
             this.world.bombs.each(_.bind(this.drawBomb, this));
+    
+            this.world.bonus.each(_.bind(this.drawBonus, this));
 
             this.world.players.sort().each(_.bind(this.drawCharacter, this));
 
@@ -177,6 +179,40 @@ define([
                 SQUARE_SIZE, SQUARE_SIZE,
                 x, y,
                 SQUARE_SIZE, SQUARE_SIZE);
+        },
+
+        drawBonus: function (bonus) {
+            if (bonus.get('x') >= 0 && bonus.get('y') >= 0) {
+                var srcX = 0;
+
+                switch(bonus.get('type')) {
+                    case 'flame':
+                        srcX = 0;
+                        break;
+                    case 'bomb':
+                        srcX = 1;
+                        break;
+                    case 'speed':
+                        srcX = 2;
+                        break;
+                    case 'death':
+                        srcX = 4;
+                        break;
+                    default:
+                        srcX = 0;
+                }
+
+                var x = bonus.get('x') * SQUARE_SIZE - this.viewport.xx;
+                var y = bonus.get('y') * SQUARE_SIZE - this.viewport.yy;
+
+                this.ctx.drawImage(this.sprTiles,
+                    srcX * SQUARE_SIZE, // src x
+                    2 * SQUARE_SIZE,    // src y
+                    SQUARE_SIZE,    // width
+                    SQUARE_SIZE,    // height
+                    x, y,           // destination  
+                    SQUARE_SIZE, SQUARE_SIZE);  // destination size
+            }
         },
 
         drawBreaking: function(b) {

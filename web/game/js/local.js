@@ -13,7 +13,7 @@ define([
     var DOWN = 40;
     var SPACE = 32;
 
-    var PLAYER_MOVE_SPEED = 5; // squares per second
+    //var PLAYER_MOVE_SPEED = 5; // moved to Character.speed
     var PLAYER_MAX_SPEED = 0.9;
 
     var keymap = {}; // it's ok to be global
@@ -79,7 +79,7 @@ define([
         update: function(delta) {
             if (this.me.get('dead')) return;
 
-            var speed = delta * PLAYER_MOVE_SPEED;
+            var speed = delta * this.me.get('speed');
             if (speed > PLAYER_MAX_SPEED) speed = PLAYER_MAX_SPEED;
             var dx = 0;
 
@@ -99,6 +99,23 @@ define([
                 this.tryPlaceBomb();
 
             this.me.set('moving', moving===true);
+  
+            var bonusToRemove = null;
+            this.world.bonus.each(_.bind(function(iBonus) {
+                var bonus = iBonus;
+                if (bonus.get('x') === Math.floor(this.me.get('x')) && 
+                    bonus.get('y') === Math.floor(this.me.get('y')) ) {
+                        // user get bonus
+                        this.userGetBonus(bonus);
+                        // remove bonus
+                        bonusToRemove = bonus;
+                }
+            }, this));
+
+            if (bonusToRemove) {
+                this.world.onBonusRemoved(bonusToRemove);
+            }
+            
 
             var cx = Math.floor(this.me.get('x'));
             var cy = Math.floor(this.me.get('y'));
@@ -107,6 +124,16 @@ define([
             if (flame!=null) {
                 this.me.die(flame);
                 play('die');
+            }
+        },
+
+        userGetBonus: function (iBonus) {
+            switch(iBonus.get('type')) {
+                case 'speed':
+                    this.me.increaseSpeed();
+                    break;
+                default:
+                    break;
             }
         },
 

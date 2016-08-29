@@ -21,7 +21,10 @@ define([
             orient: ORIENT_DOWN,
             moving: false,
             dead: true,
-            score: 0
+            score: 0,
+
+            speed: 5,   // default speed : 5 square per second
+            maxSpeed: 25,
         },
 
         deltaMove: function(x, y) {
@@ -36,6 +39,12 @@ define([
                 this.set('orient', ORIENT_UP);
             else if (y>0)
                 this.set('orient', ORIENT_DOWN);
+        },
+
+        increaseSpeed: function () {
+            if (this.get('speed') < this.get('maxSpeed')) {
+                this.set('speed',  (this.get('speed') + 2));
+            }
         },
 
         die: function(flame) {

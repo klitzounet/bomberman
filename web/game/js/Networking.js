@@ -18,6 +18,7 @@ define([
             this.world.player.on('die', this.playerDie, this);
 
             this.world.placeBombs.on('add', this.requestPlaceBomb, this);
+            this.world.bonus.on('remove', this.requestRemoveBonus, this);
 
             //this.socket = io.connect(window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/' + opt.game);
             this.socket = io.connect('/' + opt.game);
@@ -41,6 +42,8 @@ define([
             this.socket.on('bomb-boomed', $.proxy(this.onBombBoomed, this));
 
             this.socket.on('break-tiles', $.proxy(this.onTilesBroke, this));
+            this.socket.on('bonus', $.proxy(this.onBonusReceived, this));
+            this.socket.on('remove-bonus', $.proxy(this.onBonusRemoved, this));
         },
 
         onDisconnect: function() {
@@ -196,6 +199,11 @@ define([
             this.world.placeBombs.remove(b);
         },
 
+        requestRemoveBonus: function (iBonusToRemove) {
+            console.log(iBonusToRemove);
+            this.socket.emit('remove-bonus', {x: iBonusToRemove.get('x'), y: iBonusToRemove.get('y')});
+        },
+
         sendPlayerChange: _.throttle(function(player) {
             this.socket.emit('update', {
                 id: this.id,
@@ -274,7 +282,22 @@ define([
             var mates =_.map(d.ids, function(id) { return self.peers[id] });
 
             this.world.updateFriendScoring(mates, d.scores);
-        }
+        },
+
+        onBonusReceived: function (bonus) {
+            for (var i = 0 ; i < bonus.length; i++) {
+                this.world.bonus.add(new Bonus({x:bonus[i].x, y:bonus[i].y, type: bonus[i].type}));
+            }
+            
+        },
+
+        onBonusRemoved: function (iBonus) {
+            this.world.bonus.each(_.bind(function(bonus) { 
+                if (bonus.get('x') === iBonus.x && bonus.get('y') === iBonus.y ) {
+                    this.world.onBonusRemoved(bonus);
+                }
+            }, this));
+        },
 
     });
 
