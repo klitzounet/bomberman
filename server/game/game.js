@@ -122,10 +122,10 @@
             },{
                 name: 'bomb',
                 prob: 0.15
-            }/*,{
+            },{
                 name: 'death',
                 prob: 0.2
-            }*/];
+            }];
             
             var generatedBonus = [];
 
