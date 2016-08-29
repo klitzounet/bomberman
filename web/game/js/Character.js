@@ -26,7 +26,10 @@ define([
             speed: 5,   // default speed : 5 square per second
             maxSpeed: 20,
             bombStrength: 1,
-            maxBombStrength: 7
+            maxBombStrength: 7,
+            placedBombs: 0,
+            maxPlacedBombs: 1,
+            maxMaxPlacedBombs: 5
         },
 
         deltaMove: function(x, y) {
@@ -55,7 +58,14 @@ define([
             }
         },
 
+        increaseMaxPlacedBombs: function () {
+            if (this.get('maxPlacedBombs') < this.get('maxMaxPlacedBombs')) {
+                this.set('maxPlacedBombs',  (this.get('maxPlacedBombs') + 1));
+            }
+        },
+
         die: function(flame) {
+            this.set('maxPlacedBombs', 1);
             this.set('bombStrength', 1);
             this.set('speed', 5);
             this.set('dead', true);

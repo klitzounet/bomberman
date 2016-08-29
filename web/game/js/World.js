@@ -166,13 +166,14 @@ define([
         },
 
         onBombRemoved: function(b) {
+            if (b.get('owner') === this.player.id && this.player.get('placedBombs') > 0) {
+                this.player.set('placedBombs', this.player.get('placedBombs') - 1 );
+            }
             this.map.setBomb(b.get('x'), b.get('y'), null);
         },
 
         onBonusRemoved: function (bonus) {
-            console.log(this.bonus);
             this.bonus.remove(bonus);
-            console.log(this.bonus);
         },
 
         onFlameRemoved: function(f) {
