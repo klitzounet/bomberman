@@ -135,6 +135,9 @@ define([
                  case 'flame':
                     this.me.increaseBombStrength();
                     break;
+                case 'bomb':
+                     this.me.increaseMaxPlacedBombs();
+                break;
                 default:
                     break;
             }
@@ -144,8 +147,11 @@ define([
             var x = Math.floor(this.me.get('x'));
             var y = Math.floor(this.me.get('y'));
             var strength = this.me.get('bombStrength');
-            if (this.world.map.getBomb(x, y) == null)
+
+            if (this.world.map.getBomb(x, y) == null && this.me.get('placedBombs') < this.me.get('maxPlacedBombs')) {
                 this.world.placeBomb(x, y, strength);
+                this.me.set('placedBombs',  this.me.get('placedBombs') + 1);
+            }
         },
 
         requestMove: function(dx, dy) {

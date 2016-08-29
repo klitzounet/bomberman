@@ -115,14 +115,14 @@
         generateBonus: function (explodedBlocks) {
             var bonus = [{
                 name: 'speed',
-                prob: 0.2
+                prob: 0.15
             },{
                 name: 'flame',
-                prob: 0.2
-            }/*,{
-                name: 'bomb',
-                prob: 0.2
+                prob: 0.15
             },{
+                name: 'bomb',
+                prob: 0.15
+            }/*,{
                 name: 'death',
                 prob: 0.2
             }*/];
