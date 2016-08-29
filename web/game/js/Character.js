@@ -25,6 +25,8 @@ define([
 
             speed: 5,   // default speed : 5 square per second
             maxSpeed: 25,
+            bombStrength: 1,
+            maxBombStrength: 8
         },
 
         deltaMove: function(x, y) {
@@ -44,6 +46,12 @@ define([
         increaseSpeed: function () {
             if (this.get('speed') < this.get('maxSpeed')) {
                 this.set('speed',  (this.get('speed') + 2));
+            }
+        },
+
+        increaseBombStrength: function () {
+            if (this.get('bombStrength') < this.get('maxBombStrength')) {
+                this.set('bombStrength',  (this.get('bombStrength') + 1));
             }
         },
 

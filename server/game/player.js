@@ -8,8 +8,7 @@
         defaults: {
             alive: false,
             spawnAt: 0,
-            score: 0,
-            playerSpeed: 5 // default speed 5 square per second
+            score: 0
         },
 
         initialize: function() {
@@ -120,9 +119,9 @@
             if (!this.game.bombs.any(function(b) { return b.get('x') == d.x && b.get('y') == d.y; }))
             {
                 // no bomb here
-                this.game.bombs.add(new Bomb({x: d.x, y: d.y, owner: this.id}));
+                this.game.bombs.add(new Bomb({x: d.x, y: d.y, owner: this.id, strength: d.strength}));
                 // notify everyone
-                this.endpoint.emit('bomb-placed', {x: d.x, y: d.y, owner: this.id});
+                this.endpoint.emit('bomb-placed', {x: d.x, y: d.y, owner: this.id, strength: d.strength});
             } else {
                 console.log('A bomb at ' + d.x + ", " + d.y + " already exists!");
             }

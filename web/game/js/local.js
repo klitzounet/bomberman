@@ -132,6 +132,9 @@ define([
                 case 'speed':
                     this.me.increaseSpeed();
                     break;
+                 case 'flame':
+                    this.me.increaseBombStrength();
+                    break;
                 default:
                     break;
             }
@@ -140,8 +143,9 @@ define([
         tryPlaceBomb: function() {
             var x = Math.floor(this.me.get('x'));
             var y = Math.floor(this.me.get('y'));
+            var strength = this.me.get('bombStrength');
             if (this.world.map.getBomb(x, y) == null)
-                this.world.placeBomb(x, y);
+                this.world.placeBomb(x, y, strength);
         },
 
         requestMove: function(dx, dy) {

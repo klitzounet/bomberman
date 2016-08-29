@@ -195,12 +195,11 @@ define([
         },
 
         requestPlaceBomb: function(b) {
-            this.socket.emit('put-bomb', {x: b.get('x'), y: b.get('y')});
+            this.socket.emit('put-bomb', {x: b.get('x'), y: b.get('y'), strength: b.get('strength')});
             this.world.placeBombs.remove(b);
         },
 
         requestRemoveBonus: function (iBonusToRemove) {
-            console.log(iBonusToRemove);
             this.socket.emit('remove-bonus', {x: iBonusToRemove.get('x'), y: iBonusToRemove.get('y')});
         },
 

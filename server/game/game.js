@@ -116,10 +116,10 @@
             var bonus = [{
                 name: 'speed',
                 prob: 0.2
-            }/*,{
+            },{
                 name: 'flame',
                 prob: 0.2
-            },{
+            }/*,{
                 name: 'bomb',
                 prob: 0.2
             },{

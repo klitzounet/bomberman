@@ -112,9 +112,10 @@ define([
         },
 
         /** bombs */
-        placeBomb: function(x, y) {
+        placeBomb: function(x, y, strength) {
+            strength = strength || 1;
             // add on temporary queue
-            this.placeBombs.add(new Bomb({x: x, y: y}));
+            this.placeBombs.add(new Bomb({x: x, y: y, strength: strength}));
         },
 
         explodeBomb: function(b, strength) {

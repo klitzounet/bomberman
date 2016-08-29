@@ -134,8 +134,6 @@ var Server = Backbone.Model.extend({
     },
 
     onBombRemoved: function(b) {
-//            console.log('exploding bomb at ' + b.get('x') + "," + b.get('y'));
-
         this.endpoint.emit('bomb-boomed', {
             x: b.get('x'),
             y: b.get('y'),

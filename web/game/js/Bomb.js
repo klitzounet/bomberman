@@ -11,7 +11,8 @@ define([
         defaults: {
             x: 0,
             y: 0,
-            owner: -1
+            owner: -1,
+            strength: 1
         }
     });
 
