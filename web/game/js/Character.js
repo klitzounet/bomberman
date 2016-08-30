@@ -29,7 +29,8 @@ define([
             maxBombStrength: 7,
             placedBombs: 0,
             maxPlacedBombs: 1,
-            maxMaxPlacedBombs: 5
+            maxMaxPlacedBombs: 5,
+            invertDirections: false
         },
 
         deltaMove: function(x, y) {
@@ -66,6 +67,7 @@ define([
 
         die: function(flame) {
             this.set('maxPlacedBombs', 1);
+            this.set('invertDirections', false);
             this.set('bombStrength', 1);
             this.set('speed', 5);
             this.set('dead', true);

@@ -90,6 +90,11 @@ define([
             if (keymap[UP])     dy-=speed;
             if (keymap[DOWN])   dy+=speed;
 
+            if (this.me.get('invertDirections') ) {
+                dx = -dx;
+                dy = -dy;
+            }
+
             var moving = keymap[LEFT] || keymap[RIGHT] || keymap[UP] || keymap[DOWN];
 
             if (moving)
@@ -138,9 +143,47 @@ define([
                 case 'bomb':
                      this.me.increaseMaxPlacedBombs();
                 break;
+                case 'death':
+                    this.handleMalus();
+                break;
                 default:
                     break;
             }
+        },
+
+
+        handleMalus: function () {
+
+            var rand = Math.floor(Math.random() * (2)); // random between 0 and N
+            var timer = 0;
+            var endOfMalusTimer = 8000; // 8 seconds
+
+            switch(rand) {
+                case 0:
+                    // maximal speeeed !
+                    this.me.set('speed', 30);
+                    setTimeout(function() {
+                        this.me.set('speed', 5);
+                    }.bind(this), endOfMalusTimer);
+                    break;
+                case 1:
+                    // slowness
+                    this.me.set('speed', 2);
+                    setTimeout(function() {
+                        this.me.set('speed', 5);
+                    }.bind(this), endOfMalusTimer);
+                    break;
+                case 2:
+                    // invert directions
+                    this.me.set('invertDirections', true);
+                    setTimeout(function() {
+                        this.me.set('invertDirections', false);
+                    }.bind(this), endOfMalusTimer);
+                    break;
+                default:
+                    break;
+            }
+
         },
 
         tryPlaceBomb: function() {
