@@ -25,6 +25,8 @@ define([
 
             this.lobby.on('list-games', _.bind(this.onGamesList, this));
 
+            this.lobby.on('create-game', _.bind(this.onGameCreate, this));
+
 //            fb.on("auth", _.bind(this.gotFacebookUser, this));
 //            fb.on("not-logged", function() {
 //                $("#facebook-login").show();
@@ -40,7 +42,8 @@ define([
 
         events: {
             "click .character li": "selectCharacter",
-            "click .game-mode": "startGame"
+            "click .game-mode": "startGame",
+            "click .create-game-btn": "createGame",
         },
 
         selectCharacter: function(e) {
@@ -129,7 +132,31 @@ define([
                             character: character,
                             game: game
                         });
-        }
+        },
+
+        /*
+        * Create a new game on server
+        */
+        createGame: function(){
+            var type = $('#type-map').val();
+            var size = $('#size-map').val();
+            var mode = $('#game-mode').val();
+
+
+            console.log('create: ', type, size, mode);
+            this.lobby.emit("create-game", {
+                type: type,
+                size: size,
+                mode: mode
+            });
+        },
+
+        /*
+        *
+        */
+        onGameCreate:function(i){
+            console.log('game creation success ?', i);
+        },
 
     });
 

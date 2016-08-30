@@ -129,6 +129,8 @@
 
             &.free { background: url('../res/mode-arena.png'); }
 
+            &.custom { background: url('../res/custom-arena.png'); }
+
             &.free:hover {
                 @include box-shadow(#ff0 0 0 30px 3px);
             }
