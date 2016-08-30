@@ -52,6 +52,8 @@ var Server = Backbone.Model.extend({
         var game = new Game({
             redis: redis,
             type: opt.type || 'free',
+            mode: opt.mode || '',
+            mapSize: opt.size,
             title: 'game' + games.length
         });
 
@@ -98,11 +100,12 @@ var Server = Backbone.Model.extend({
             socket.emit("list-games", gamesList);
         }, this));
 
+
+
         socket.on('create-game', _.bind(function(d) {
             d = d || {};
 
-            console.log('create new game');
-            console.log('       new game options: ', d);
+            console.log('create new game :', d);
 
             this._createNewGame({
                 type: d.type || 'free',
@@ -113,6 +116,29 @@ var Server = Backbone.Model.extend({
             socket.emit("create-game", {
                 "response": "game created"
             });
+        }, this));
+
+
+
+        socket.on('get-game-param', _.bind(function(d) {
+            d = d || {};
+
+            console.log('someone aks params of ', d.game);
+
+            var params = {};
+
+            for(var i=0;i<games.length;i++){
+                if(games[i].title === d.game){
+                    params['type'] = games[i].type;
+                    params['mode'] = games[i].mode;
+                    params['mapSize'] = {
+                        w: games[i].map.getMap().w,
+                        h: games[i].map.getMap().h
+                    };
+                }
+            }
+
+            socket.emit("get-game-param", params);
         }, this));
 
     },
@@ -156,7 +182,7 @@ var Server = Backbone.Model.extend({
             });
             game.ctrlsById[playerId] = ctrl;
 
-            ctrl.on('disconnect', _.bind(function() {
+            ctrl.on('disconnect', _.bind(function(game) {
                 delete game.playersById[playerId];
                 delete game.ctrlsById[playerId];
 
@@ -168,7 +194,7 @@ var Server = Backbone.Model.extend({
                 });
 
                 game.countersPlayer--;
-            }, this));
+            }, this, game));
 
             console.log("+ " + name + " joined the game " + d.fbuid);
 

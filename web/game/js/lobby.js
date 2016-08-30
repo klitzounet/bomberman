@@ -27,6 +27,8 @@ define([
 
             this.lobby.on('create-game', _.bind(this.onGameCreate, this));
 
+            this.lobby.on('get-game-param', _.bind(this.lauchGame, this));
+
 //            fb.on("auth", _.bind(this.gotFacebookUser, this));
 //            fb.on("not-logged", function() {
 //                $("#facebook-login").show();
@@ -102,19 +104,58 @@ define([
         },
 
         startGame: function(e) {
-            var name = $('#userid').val();
+            this.currentTarget = e.currentTarget;
+
+            //var name = $('#userid').val();
             var game = $(e.currentTarget).data("game");
+            /*var character = $(".character-select li.selected div").attr("class");
+
+            localStorage.setItem("userName", name);
+            localStorage.setItem("character", character);
+
+            console.log("Joining " + game);*/
+
+            if ($('#userid').val().length==0) {
+                alert("Please enter a name.");
+                return;
+            }
+
+            this.lobby.emit("get-game-param", {
+                game: game
+            });
+
+            /*$("#lobby").hide();
+            $("#game").show();
+
+            new Game({
+                playerName: name,
+                // fbuid: fb.uid,
+                character: character,
+                game: game
+            });*/
+
+            /*console.log({
+                playerName: name,
+                fbuid: FBuid,
+                character: character,
+                game: game
+            });*/
+        },
+
+        /*
+        *
+        */
+        lauchGame:function(params){
+            console.log('game params', params);
+
+            var name = $('#userid').val();
+            var game = $(this.currentTarget).data("game");
             var character = $(".character-select li.selected div").attr("class");
 
             localStorage.setItem("userName", name);
             localStorage.setItem("character", character);
 
             console.log("Joining " + game);
-
-            if (name.length==0) {
-                alert("Please enter a name.");
-                return;
-            }
 
             $("#lobby").hide();
             $("#game").show();
@@ -123,15 +164,11 @@ define([
                 playerName: name,
                 // fbuid: fb.uid,
                 character: character,
-                game: game
+                game: game,
+                mapSize: params.mapSize,
+                mapType: params.type,
+                mode: params.mode
             });
-
-            console.log({
-                            playerName: name,
-                            fbuid: FBuid,
-                            character: character,
-                            game: game
-                        });
         },
 
         /*
@@ -157,6 +194,7 @@ define([
         onGameCreate:function(i){
             console.log('game creation success ?', i);
         },
+
 
     });
 

@@ -100,7 +100,10 @@ define([
 
             this.flames.on('remove', this.onFlameRemoved, this);
 
-            this.canvas = new GameCanvas({world: this});
+            this.canvas = new GameCanvas({
+                world: this,
+                mapSize: opt.mapSize
+            });
         },
 
         onCharacterAdded: function(c) {

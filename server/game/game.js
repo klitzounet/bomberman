@@ -23,15 +23,19 @@
         initialize: function(opt) {
             this.redis = opt.redis;
 
-            this.map = new Map();
+            this.title = opt.title;
+            this.type = opt.type;
+            this.mode = opt.mode;
 
             this.playersById = {};
             this.ctrlsById = {};
             this.maxPlayerId = 0;
 
-            this.title = opt.title;
-            this.type = opt.type;
             this.countersPlayer = 0;
+
+            this.map = new Map({
+                size: opt.mapSize
+            });
 
             this.bombs = new BombCollection();
             this.bombs.on('add', this.onBombAdded, this);
@@ -218,7 +222,7 @@
                 this.ctrlsById[byWhoId].notifyFriendBattles();
             }
             this.trigger('score-changes');
-        }
+        },
 
     });
 

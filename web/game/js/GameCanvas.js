@@ -15,8 +15,8 @@ define([
     var CHAR_CX = 11;
     var CHAR_CY = 17;
 
-    var VIEW_W = 40;
-    var VIEW_H = 25;
+    var VIEW_W = 30;
+    var VIEW_H = 15;
 
     GameCanvas = Backbone.View.extend({
 
@@ -26,6 +26,10 @@ define([
             this.world.map.gameCanvas = this;
 
             // canvas
+
+            VIEW_W = opt.mapSize.w || 30;
+            VIEW_H = opt.mapSize.h || 15;
+
             this.$canvas = this._canvas(VIEW_W * SQUARE_SIZE, VIEW_H * SQUARE_SIZE);
             this.ctx = this.$canvas.get(0).getContext("2d");
 

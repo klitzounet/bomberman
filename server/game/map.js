@@ -54,18 +54,53 @@
 
     Map = Backbone.Model.extend({
         defaults: {
-            width: 40,
+            width: 25,
             height: 25,
             x: 5,
-            y: 3
+            y: 3,
         },
 
-        initialize: function() {
+        initialize: function(opt) {
+            opt = opt || {};
+
+            if(opt.size){
+                this._setMapSize(opt.size);
+            }
+
             var map = new MapGenerator({
                 w: this.get('width'),
                 h: this.get('height')
             }).getMap();
             this.set(map);
+        },
+
+        _setMapSize:function(sizeLabel){
+            switch(sizeLabel){
+                case 'xs':
+                    this.set('width',11);
+                    this.set('height',9);
+                    return;
+
+                case 's':
+                    this.set('width',15);
+                    this.set('height',15);
+                    return;
+
+                case 'm':
+                    this.set('width',25);
+                    this.set('height',25);
+                    return;
+
+                case 'l':
+                    this.set('width',35);
+                    this.set('height',35);
+                    return;
+
+                case 'xl':
+                    this.set('width',50);
+                    this.set('height',50);
+                    return;
+            }
         },
 
         getAbsTile: function(x, y) {

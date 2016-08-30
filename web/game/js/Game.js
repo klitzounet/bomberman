@@ -19,7 +19,10 @@ define([
 
             $(window).resize(_.bind(this.layout, this));
 
-            this.world = new World({ container: $("#view") });
+            this.world = new World({
+                container: $("#view"),
+                mapSize: opt.mapSize
+            });
 
             // create our player
             this.world.player = new Character({
