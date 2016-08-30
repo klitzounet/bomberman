@@ -10,12 +10,15 @@
 
 #lobby {
 
-    width: 600px;
-    margin: 50px auto;
+    margin: auto;
     white-space: nowrap;
     font-size: 18px;
-    color: #051;
+    color: #000000;
 
+    .container {
+        width: 600px;
+        margin: auto;
+    }
 
     .left {
         display: inline-block;
@@ -26,7 +29,6 @@
     .right {
         display: inline-block;
         vertical-align: top;
-        margin-left: -40px;
     }
 
     .logo {
@@ -38,7 +40,10 @@
     section { margin: 15px; }
 
     .player {
-        @include shaded-box();
+
+        background-color: #2073c0;
+        padding: 10px;
+        color: #000000;
 
         #userpic {
             display: inline-block;
@@ -54,13 +59,13 @@
         }
 
         input {
-            background: #205f20;
+            background: #dbdbdb;
             border: none;
-            font-size: 22px;
-            color: #5d4;
+            font-size: 20px;
+            color: #2073c0;
             padding: 8px;
             width: 250px;
-            @include border-radius(5px);
+            @include border-radius(2px);
         }
 
         input:focus {
@@ -74,12 +79,15 @@
             margin: 5px;
             display: inline-block;
             padding: 10px;
-            background-color: #384;
-            @include border-radius(5px);
+            background-color: #ffffff;
+            @include border-radius(3px);
             opacity: 0.5;
         }
-        li:hover { background-color: #5b7; }
-        li.selected { background-color: #5b7; opacity: 1; }
+        li:hover { 
+            background-color: #e67e22; 
+            cursor: pointer;
+        }
+        li.selected { background-color: #e67e22; opacity: 1; }
 
         li div {
             width: 22px;
@@ -98,23 +106,15 @@
         .frame3 .selected div { background-position: -22px 0; }
     }
 
-    #facebook-login {
-        p {
-            font-size: 12px;
-            white-space: normal;
-            line-height: 15px;
-            color: #8fa;
-        }
-        a { color: #afa; }
-    }
 
     .games {
-        @include shaded-box();
+        background-color: #2073c0;
         padding: 20px;
+        color: #000000;
 
         #games-list {
             min-width: 258px;
-            min-height: 300px;
+            min-height: 413px;
         }
 
         .game-mode {
@@ -210,17 +210,16 @@ article {
 
 
 footer {
-    background: #373;
+    background: #2073c0;
     width: 100%;
     padding: 30px 20px;
     font-size: 13px;
     line-height: 20px;
-    color: #252;
+    color: #000000;
     margin-top: 35px;
-    position: absolute;
-    left: 0;
-    right: 0;
     box-sizing: border-box;
+    position: absolute;
+    bottom: 0px;
 
-    a { color: #4c4; }
+    a { color: #e67e22; }
 }

@@ -154,7 +154,7 @@ define([
 
         handleMalus: function () {
 
-            var rand = Math.floor(Math.random() * (2)); // random between 0 and N
+            var rand = Math.floor(Math.random() * (3)); // random between 0 and N
             var timer = 0;
             var endOfMalusTimer = 8000; // 8 seconds
 
