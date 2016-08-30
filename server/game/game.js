@@ -29,6 +29,10 @@
             this.ctrlsById = {};
             this.maxPlayerId = 0;
 
+            this.title = opt.title;
+            this.type = opt.type;
+            this.countersPlayer = 0;
+
             this.bombs = new BombCollection();
             this.bombs.on('add', this.onBombAdded, this);
 

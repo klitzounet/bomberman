@@ -1,10 +1,9 @@
 /* line 7, ../sass/game.scss */
 #game #view {
   position: absolute;
-  -moz-box-shadow: black 0px 3px 20px;
-  -webkit-box-shadow: black 0px 3px 20px;
-  -o-box-shadow: black 0px 3px 20px;
-  box-shadow: black 0px 3px 20px;
+  -moz-box-shadow: #000 0px 3px 20px;
+  -webkit-box-shadow: #000 0px 3px 20px;
+  box-shadow: #000 0px 3px 20px;
 }
 /* line 13, ../sass/game.scss */
 #game #waitserver {
@@ -153,9 +152,6 @@
   padding: 2px 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
-  -o-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -khtml-border-radius: 10px;
   border-radius: 10px;
 }
 /* line 132, ../sass/game.scss */
@@ -238,10 +234,9 @@
   border-top: solid 1px #6af;
   background: #04a;
   z-index: 1000;
-  -moz-box-shadow: black 0px -3px 20px;
-  -webkit-box-shadow: black 0px -3px 20px;
-  -o-box-shadow: black 0px -3px 20px;
-  box-shadow: black 0px -3px 20px;
+  -moz-box-shadow: #000 0px -3px 20px;
+  -webkit-box-shadow: #000 0px -3px 20px;
+  box-shadow: #000 0px -3px 20px;
 }
 /* line 206, ../sass/game.scss */
 #game #chatbox {

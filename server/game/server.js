@@ -22,11 +22,12 @@ require("./player.js");
 var Server = Backbone.Model.extend({
 
     initialize: function(opt) {
-        var io = opt.io;
+        io = opt.io;
         redis = opt.redis;
 
-        global.counters.players = 0;
+        //global.counters.players = 0;
         global.counters.mapfill = 0;
+        games = [];
 
         if (redis) {
             redis.incr("counters.restarts");
@@ -35,40 +36,92 @@ var Server = Backbone.Model.extend({
 
         io.set('log level', 1);
 
-        this.game = new Game({ redis: redis });
-
-        this.game.bombs.on('remove', this.onBombRemoved, this);
-
-        this.game.on('score-changes', _.debounce(this.notifyScoreUpdates, 50), this);
-
-
-        this.endpoint = io.of('/game1');
-        this.endpoint.on('connection', _.bind(this.connection, this));
-
-        this.game.endpoint = this.endpoint;
+        this._createNewGame();
 
         this.lobby = io.of('/lobby');
         this.lobby.on('connection', _.bind(this.lobbyConnection, this));
     },
 
-    lobbyConnection: function(socket) {
 
+    /*
+    * Create a new game
+    */
+    _createNewGame:function(opt){
+        opt = opt || {};
+
+        var game = new Game({
+            redis: redis,
+            type: opt.type || 'free',
+            title: 'game' + games.length
+        });
+
+        game.bombs.on('remove',  _.bind(this.onBombRemoved, this, game));
+        game.on('score-changes', _.debounce(_.bind(this.notifyScoreUpdates, this, game), 50), this);
+
+        game.countersPlayer = 0;
+
+        var endpoint = io.of('/game' + games.length);
+        game.endpoint = endpoint;
+        endpoint.on('connection', _.bind(this.connection, this, game));
+
+        games.push(game);
+    },
+
+    /*
+    * Delete game from games
+    */
+    _deleteGame:function(gameTitle){
+        for(var i=0;i<games.length;i++){
+            if(games[i].title === gameTitle){
+                var toDelete = games[i];
+
+                //to do: disconnect all players and close endpoint (io namespace)
+                //toDelete.endpoint
+
+                games.splice(i, 1);
+            }
+        }
+    },
+
+    lobbyConnection: function(socket) {
         socket.on('list-games', _.bind(function(d) {
-            socket.emit("list-games", {
-                "game1": {
-                    type: "free",
-                    count: global.counters.players
+
+            var gamesList = {};
+
+            for(var i=0;i<games.length;i++){
+                gamesList[games[i].title] = {
+                    type: games[i].type,
+                    count: games[i].countersPlayer
                 }
+            }
+
+            socket.emit("list-games", gamesList);
+        }, this));
+
+        socket.on('create-game', _.bind(function(d) {
+            d = d || {};
+
+            console.log('create new game');
+            console.log('       new game options: ', d);
+
+            this._createNewGame({
+                type: d.type || 'free',
+                size: d.size || 'regular',
+                mode: d.mode || 'timeless'
+            });
+
+            socket.emit("create-game", {
+                "response": "game created"
             });
         }, this));
 
     },
 
-    connection: function(socket) {
-        global.counters.players++;
+    connection: function(game, socket) {
+        game.countersPlayer++;
 
         // generate id
-        var playerId = this.game.generatePlayerId();
+        var playerId = game.generatePlayerId();
 
         // send game info
         socket.emit('game-info', {
@@ -91,30 +144,30 @@ var Server = Backbone.Model.extend({
                 character: d.character,
                 fbuid: d.fbuid
             });
-            this.game.playersById[playerId] = me;
+            game.playersById[playerId] = me;
 
             // setup a player controller
             var ctrl = new PlayerController({
                 id: playerId,
                 player: me,
-                game: this.game, // TODO joined game
+                game: game, // TODO joined game
                 socket: socket,
-                endpoint: this.endpoint
+                endpoint: game.endpoint
             });
-            this.game.ctrlsById[playerId] = ctrl;
+            game.ctrlsById[playerId] = ctrl;
 
             ctrl.on('disconnect', _.bind(function() {
-                delete this.game.playersById[playerId];
-                delete this.game.ctrlsById[playerId];
+                delete game.playersById[playerId];
+                delete game.ctrlsById[playerId];
 
 
                 // FIXME D.R.Y.
-                _.each(this.game.ctrlsById, function(ctrl, id) {
+                _.each(game.ctrlsById, function(ctrl, id) {
                     if (id == playerId) return;
                     ctrl.notifyFriendBattles();
                 });
 
-                global.counters.players--;
+                game.countersPlayer--;
             }, this));
 
             console.log("+ " + name + " joined the game " + d.fbuid);
@@ -125,7 +178,7 @@ var Server = Backbone.Model.extend({
             // update me about the current game state
             ctrl.notifyGameState();
 
-            _.each(this.game.ctrlsById, function(ctrl, id) {
+            _.each(game.ctrlsById, function(ctrl, id) {
                 if (id == playerId) return;
                 ctrl.notifyFriendBattles();
             });
@@ -133,21 +186,21 @@ var Server = Backbone.Model.extend({
 
     },
 
-    onBombRemoved: function(b) {
-        this.endpoint.emit('bomb-boomed', {
+    onBombRemoved: function(game, b) {
+        game.endpoint.emit('bomb-boomed', {
             x: b.get('x'),
             y: b.get('y'),
             strength: b.get('strength')
         });
     },
 
-    notifyScoreUpdates: function() {
+    notifyScoreUpdates: function(game) {
         var scoring = {};
-        _.each(this.game.playersById, function(p,id) {
+        _.each(game.playersById, function(p,id) {
             scoring[id] = p.get('score');
         });
 
-        this.endpoint.emit('score-updates', scoring);
+        game.endpoint.emit('score-updates', scoring);
     }
 
 
