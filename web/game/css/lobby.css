@@ -1,9 +1,12 @@
 #lobby {
-  width: 600px;
-  margin: 50px auto;
+  margin: auto;
   white-space: nowrap;
   font-size: 18px;
-  color: #051;
+  color: #000000;
+}
+#lobby .container {
+  width: 600px;
+  margin: auto;
 }
 #lobby .left {
   display: inline-block;
@@ -13,7 +16,6 @@
 #lobby .right {
   display: inline-block;
   vertical-align: top;
-  margin-left: -40px;
 }
 #lobby .logo {
   margin: 0 30px 30px 30px;
@@ -25,14 +27,9 @@
   margin: 15px;
 }
 #lobby .player {
-  -moz-border-radius: 24px;
-  -webkit-border-radius: 24px;
-  border-radius: 24px;
-  -moz-box-shadow: #051, 0, 0, 30px;
-  -webkit-box-shadow: #051, 0, 0, 30px;
-  box-shadow: #051, 0, 0, 30px;
-  background: #273;
-  padding: 5px;
+  background-color: #2073c0;
+  padding: 10px;
+  color: #000000;
 }
 #lobby .player #userpic {
   display: inline-block;
@@ -50,15 +47,15 @@
   box-shadow: #000 0 1px 6px;
 }
 #lobby .player input {
-  background: #205f20;
+  background: #dbdbdb;
   border: none;
-  font-size: 22px;
-  color: #5d4;
+  font-size: 20px;
+  color: #2073c0;
   padding: 8px;
   width: 250px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 #lobby .player input:focus {
   outline: none;
@@ -67,17 +64,18 @@
   margin: 5px;
   display: inline-block;
   padding: 10px;
-  background-color: #384;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  background-color: #ffffff;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   opacity: 0.5;
 }
 #lobby .character-select li:hover {
-  background-color: #5b7;
+  background-color: #e67e22;
+  cursor: pointer;
 }
 #lobby .character-select li.selected {
-  background-color: #5b7;
+  background-color: #e67e22;
   opacity: 1;
 }
 #lobby .character-select li div {
@@ -109,29 +107,18 @@
 #lobby .character-select .frame3 .selected div {
   background-position: -22px 0;
 }
-#lobby #facebook-login p {
-  font-size: 12px;
-  white-space: normal;
-  line-height: 15px;
-  color: #8fa;
-}
-#lobby #facebook-login a {
-  color: #afa;
-}
 #lobby .games {
-  -moz-border-radius: 24px;
-  -webkit-border-radius: 24px;
-  border-radius: 24px;
-  -moz-box-shadow: #051, 0, 0, 30px;
-  -webkit-box-shadow: #051, 0, 0, 30px;
-  box-shadow: #051, 0, 0, 30px;
-  background: #273;
-  padding: 5px;
+  background-color: #2073c0;
   padding: 20px;
+  color: #000000;
+  max-height: 435px;
+  overflow: auto;
+  overflow-x: hidden;
+  width: 100%;
 }
 #lobby .games #games-list {
   min-width: 258px;
-  min-height: 300px;
+  min-height: 413px;
 }
 #lobby .games .game-mode {
   position: relative;
@@ -237,18 +224,17 @@ article p {
 }
 
 footer {
-  background: #373;
+  background: #2073c0;
   width: 100%;
   padding: 30px 20px;
   font-size: 13px;
   line-height: 20px;
-  color: #252;
+  color: #000000;
   margin-top: 35px;
-  position: absolute;
-  left: 0;
-  right: 0;
   box-sizing: border-box;
+  position: absolute;
+  bottom: 0px;
 }
 footer a {
-  color: #4c4;
+  color: #e67e22;
 }
