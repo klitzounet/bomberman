@@ -111,6 +111,10 @@
         background-color: #2073c0;
         padding: 20px;
         color: #000000;
+        max-height: 435px;
+        overflow: auto;
+        overflow-x: hidden;
+        width: 100%;
 
         #games-list {
             min-width: 258px;
