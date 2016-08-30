@@ -131,7 +131,7 @@ a:hover {
 #lobby .player {
   background-color: #2073c0;
   padding: 10px;
-  color: #000000;
+  color: #ffffff;
 }
 #lobby .player #userpic {
   display: inline-block;
@@ -212,11 +212,11 @@ a:hover {
 #lobby .games {
   background-color: #2073c0;
   padding: 20px;
-  color: #000000;
+  color: #ffffff;
   max-height: 435px;
   overflow: auto;
   overflow-x: hidden;
-  width: 100%;
+  min-width: 275px;
 }
 #lobby .games #games-list {
   min-width: 258px;
@@ -296,6 +296,21 @@ a:hover {
   -webkit-box-shadow: #000 0 1px 5px;
   box-shadow: #000 0 1px 5px;
 }
+#lobby .games .map-size {
+  position: absolute;
+  background: #aaa;
+  padding: 5px 10px;
+  left: -10px;
+  margin-top: -5px;
+  margin-right: -5px;
+  color: #fff;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  -moz-box-shadow: #000 0 1px 5px;
+  -webkit-box-shadow: #000 0 1px 5px;
+  box-shadow: #000 0 1px 5px;
+}
 #lobby .games label {
   position: absolute;
   color: #fff;
@@ -310,6 +325,31 @@ a:hover {
 }
 #lobby .games .game-mode:first-child {
   margin-top: 0;
+}
+#lobby .new-game {
+  background-color: #2073c0;
+  padding: 20px;
+  color: #ffffff;
+}
+#lobby .new-game select {
+  border-radius: 3px;
+  margin: 1px;
+  padding: 2px;
+}
+#lobby .new-game button {
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  color: #ffffff;
+  background: #8fb8df;
+  padding: 8px 14px;
+  text-decoration: none;
+  border: none;
+  margin: 2px;
+}
+#lobby .new-game button:hover {
+  background: #e67e22;
+  text-decoration: none;
 }
 
 article {

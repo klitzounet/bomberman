@@ -26,6 +26,7 @@
             this.title = opt.title;
             this.type = opt.type;
             this.mode = opt.mode;
+            this.size = opt.size;
 
             this.playersById = {};
             this.ctrlsById = {};
@@ -34,7 +35,7 @@
             this.countersPlayer = 0;
 
             this.map = new Map({
-                size: opt.mapSize
+                size: opt.size
             });
 
             this.bombs = new BombCollection();

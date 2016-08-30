@@ -200,6 +200,7 @@ define([
 
     var gameTemplate = _.template('<div class="game-mode <%= type %>">'+
                                     '<div class="counter"><%= count %></div>' +
+                                    '<div class="map-size"><%= size %></div>' +
                                     '<div class="play">play</div>' +
                                 '</div>)');
 

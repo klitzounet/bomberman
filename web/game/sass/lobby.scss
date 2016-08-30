@@ -43,7 +43,7 @@
 
         background-color: #2073c0;
         padding: 10px;
-        color: #000000;
+        color: #ffffff;
 
         #userpic {
             display: inline-block;
@@ -110,11 +110,12 @@
     .games {
         background-color: #2073c0;
         padding: 20px;
-        color: #000000;
+        color: #ffffff;
         max-height: 435px;
         overflow: auto;
         overflow-x: hidden;
-        width: 100%;
+        //width: 100%;
+        min-width: 275px;
 
         #games-list {
             min-width: 258px;
@@ -182,6 +183,18 @@
             @include box-shadow(#000 0 1px 5px);
         }
 
+        .map-size {
+            position: absolute;
+            background: #aaa;
+            padding: 5px 10px;
+            left: -10px;
+            margin-top: -5px;
+            margin-right: -5px;
+            color: #fff;
+            @include border-radius(8px);
+            @include box-shadow(#000 0 1px 5px);
+        }
+
         label {
             position: absolute;
             color: #fff;
@@ -198,6 +211,35 @@
 
         .game-mode:first-child {
             margin-top: 0;
+        }
+    }
+
+    .new-game{
+        background-color: #2073c0;
+        padding: 20px;
+        color: #ffffff;
+
+        select{
+            border-radius: 3px;
+            margin: 1px;
+            padding: 2px;
+        }
+
+        button {
+            -webkit-border-radius: 4;
+            -moz-border-radius: 4;
+            border-radius: 4px;
+            color: #ffffff;
+            background: #8fb8df;
+            padding: 8px 14px;
+            text-decoration: none;
+            border: none;
+            margin: 2px;
+        }
+
+        button:hover {
+            background: #e67e22;
+            text-decoration: none;
         }
     }
 

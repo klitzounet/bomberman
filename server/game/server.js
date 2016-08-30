@@ -52,8 +52,8 @@ var Server = Backbone.Model.extend({
         var game = new Game({
             redis: redis,
             type: opt.type || 'free',
-            mode: opt.mode || '',
-            mapSize: opt.size,
+            mode: opt.mode || 'timeless',
+            size: opt.size || 'm',
             title: 'game' + games.length
         });
 
@@ -93,7 +93,8 @@ var Server = Backbone.Model.extend({
             for(var i=0;i<games.length;i++){
                 gamesList[games[i].title] = {
                     type: games[i].type,
-                    count: games[i].countersPlayer
+                    count: games[i].countersPlayer,
+                    size: games[i].size
                 }
             }
 
