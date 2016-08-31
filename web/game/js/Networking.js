@@ -44,6 +44,7 @@ define([
             this.socket.on('break-tiles', $.proxy(this.onTilesBroke, this));
             this.socket.on('bonus', $.proxy(this.onBonusReceived, this));
             this.socket.on('remove-bonus', $.proxy(this.onBonusRemoved, this));
+            this.socket.on('end-of-game', $.proxy(this.onEndOfGame, this));
         },
 
         onDisconnect: function() {
@@ -72,6 +73,16 @@ define([
 
             // mark ourself in the peer list
             this.peers[this.id] = this.world.player;
+        },
+
+        onEndOfGame: function () {
+            this.world.updateScoring(true);
+            var $winner = $("#winner");
+
+            var players = this.world.players.sortBy(function(p) { return -p.get('score'); });
+
+            $winner.empty();
+            $winner.append( "<p><b>Winner: "+players[0].get('name')+"</b> ("+players[0].get('score')+")</p>" );
         },
 
         onMapUpdate: function(d) {

@@ -36,7 +36,7 @@ var Server = Backbone.Model.extend({
 
         io.set('log level', 1);
 
-        this._createNewGame();
+        //this._createNewGame();
 
         this.lobby = io.of('/lobby');
         this.lobby.on('connection', _.bind(this.lobbyConnection, this));
