@@ -65,6 +65,11 @@
                 this.endpoint.emit('end-of-game', null);
                 return;
             }
+            else if (this.timeLimited) {
+                //send remaining time
+                var remainingTime = (this.gameMaxTime + this.timeStart) - now;
+                this.endpoint.emit('end-of-game', remainingTime);
+            }
 
             // check bombs
             this.bombs.each(function(b) {
