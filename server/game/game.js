@@ -33,7 +33,7 @@
             this.ctrlsById = {};
             this.maxPlayerId = 0;
             this.timeStart = getTicks();
-            this.gameMaxTime =  8 * 1000; // max game time 300 seconds = 5mn
+            this.gameMaxTime =  300 * 1000; // max game time 300 seconds = 5mn
 
             this.countersPlayer = 0;
 
