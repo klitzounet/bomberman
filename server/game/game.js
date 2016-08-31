@@ -27,10 +27,13 @@
             this.type = opt.type;
             this.mode = opt.mode;
             this.size = opt.size;
+            this.timeLimited = (this.mode === "timelimited") ? true : false;//(typeof opt.timeLimited !== 'undefined') ? (opt.timeLimited) : (true);
 
             this.playersById = {};
             this.ctrlsById = {};
             this.maxPlayerId = 0;
+            this.timeStart = getTicks();
+            this.gameMaxTime =  300 * 1000; // max game time 300 seconds = 5mn
 
             this.countersPlayer = 0;
 
@@ -57,6 +60,11 @@
 
         update: function() {
             var now = getTicks();
+
+            if (this.gameMaxTime + this.timeStart <= now && this.timeLimited) {
+                this.endpoint.emit('end-of-game', null);
+                return;
+            }
 
             // check bombs
             this.bombs.each(function(b) {
