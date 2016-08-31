@@ -30,6 +30,7 @@
   background-color: #2073c0;
   padding: 10px;
   color: #ffffff;
+  border-radius: 5px;
 }
 #lobby .player #userpic {
   display: inline-block;
@@ -109,16 +110,14 @@
 }
 #lobby .games {
   background-color: #2073c0;
-  padding: 20px;
+  padding: 30px;
   color: #ffffff;
-  max-height: 435px;
-  overflow: auto;
+  height: 415px;
+  border-radius: 5px;
   overflow-x: hidden;
-  min-width: 275px;
 }
 #lobby .games #games-list {
   min-width: 258px;
-  min-height: 413px;
 }
 #lobby .games .game-mode {
   position: relative;
@@ -225,29 +224,79 @@
   margin-top: 0;
 }
 #lobby .new-game {
-  background-color: #2073c0;
-  padding: 20px;
-  color: #ffffff;
+  background-color: #dddddd;
+  color: #000000;
+  border-radius: 0px;
+  position: relative;
+  width: 256px;
+  vertical-align: middle;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+#lobby .new-game .left-side {
+  display: inline-block;
+  width: 180px;
+  padding: 5px;
+  vertical-align: middle;
+}
+#lobby .new-game .right-side {
+  display: inline-block;
+  width: 50px;
+  height: 90px;
+  vertical-align: middle;
+}
+#lobby .new-game .title {
+  color: #000000;
+  padding: 10px;
+  padding-bottom: 0px;
+  text-align: center;
+}
+#lobby .new-game .params {
+  padding: 3px 0px 3px 10px;
+}
+#lobby .new-game .label {
+  display: inline-block;
+  width: 40px;
+  font-size: 15px;
+}
+#lobby .new-game .options {
+  display: inline-block;
+  width: 105px;
 }
 #lobby .new-game select {
   border-radius: 3px;
   margin: 1px;
   padding: 2px;
+  width: 100%;
 }
 #lobby .new-game button {
-  -webkit-border-radius: 4;
-  -moz-border-radius: 4;
-  border-radius: 4px;
-  color: #ffffff;
+  border-radius: 2px;
+  color: #000000;
   background: #8fb8df;
   padding: 8px 14px;
   text-decoration: none;
   border: none;
   margin: 2px;
+  width: 100%;
+  height: 100%;
 }
 #lobby .new-game button:hover {
   background: #e67e22;
   text-decoration: none;
+}
+#lobby ::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+#lobby ::-webkit-scrollbar-thumb {
+  background-color: #8fb8df;
+  border-radius: 3px;
+}
+#lobby ::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bed3;
+}
+#lobby ::-webkit-scrollbar-thumb:active {
+  background-color: #a8bed3;
 }
 
 article {
