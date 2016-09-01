@@ -76,27 +76,27 @@
 
         _setMapSize:function(sizeLabel){
             switch(sizeLabel){
-                case 'xs':
+                case 'XS':
                     this.set('width',11);
                     this.set('height',9);
                     return;
 
-                case 's':
+                case 'S':
                     this.set('width',15);
                     this.set('height',15);
                     return;
 
-                case 'm':
+                case 'M':
                     this.set('width',25);
                     this.set('height',25);
                     return;
 
-                case 'l':
+                case 'L':
                     this.set('width',35);
                     this.set('height',35);
                     return;
 
-                case 'xl':
+                case 'XL':
                     this.set('width',50);
                     this.set('height',50);
                     return;

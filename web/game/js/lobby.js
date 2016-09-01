@@ -105,15 +105,7 @@ define([
 
         startGame: function(e) {
             this.currentTarget = e.currentTarget;
-
-            //var name = $('#userid').val();
             var game = $(e.currentTarget).data("game");
-            /*var character = $(".character-select li.selected div").attr("class");
-
-            localStorage.setItem("userName", name);
-            localStorage.setItem("character", character);
-
-            console.log("Joining " + game);*/
 
             if ($('#userid').val().length==0) {
                 alert("Please enter a name.");
@@ -123,23 +115,6 @@ define([
             this.lobby.emit("get-game-param", {
                 game: game
             });
-
-            /*$("#lobby").hide();
-            $("#game").show();
-
-            new Game({
-                playerName: name,
-                // fbuid: fb.uid,
-                character: character,
-                game: game
-            });*/
-
-            /*console.log({
-                playerName: name,
-                fbuid: FBuid,
-                character: character,
-                game: game
-            });*/
         },
 
         /*
@@ -198,11 +173,28 @@ define([
 
     });
 
-    var gameTemplate = _.template('<div class="game-mode <%= type %>">'+
+/*    var gameTemplate = _.template('<div class="game-mode <%= type %>">'+
                                     '<div class="counter"><%= count %></div>' +
-                                    '<div class="map-size"><%= size %></div>' +
+                                    '<!-- <div class="map-size"><%= size %></div> -->' +
+                                    '<div class="map-type <%= type %>"></div>' +
                                     '<div class="play">play</div>' +
-                                '</div>)');
+                                '</div>)');*/
+
+    var gameTemplate = _.template('<div class="game-mode">'+
+
+                                    '<div class="left-side">'+
+                                        '<div class="map-type <%= type %>"></div>' +
+                                        '<div class="counter"><%= count %> player(s)</div>' +
+                                    '</div>' +
+
+                                    '<div class="right-side">'+
+                                        '<div class="label">Map:</div>' +
+                                        '<div class="value"><%= type %> (<%= size %>)</div>' +
+
+                                        '<div class="label">Mode:</div>' +
+                                        '<div class="value"><%= mode %></div>' +
+                                    '</div>' +
+                                '</div>');
 
     var FBuid = -1;
 
