@@ -76,7 +76,7 @@ define([
         },
 
         onEndOfGame: function (remainTime) {
-            $('#winner').hide();
+            $('#end-of-game').hide();
 
             if (remainTime) {
 
@@ -99,7 +99,7 @@ define([
             } 
             else {
                 $('#view').hide();
-                $('#winner').show();
+                $('#end-of-game').show();
                 var $winner = $("#winner");
                 $winner.empty();
                 this.world.updateScoring(true);
