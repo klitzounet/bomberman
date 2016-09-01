@@ -76,24 +76,32 @@ define([
         },
 
         onEndOfGame: function (remainTime) {
-            var $winner = $("#winner");
-            $winner.empty();
+            $('#end-of-game').hide();
 
             if (remainTime) {
 
-            var difference = remainTime;
-            var daysDifference = Math.floor(difference/1000/60/60/24);
-            difference -= daysDifference*1000*60*60*24
-            var hoursDifference = Math.floor(difference/1000/60/60);
-            difference -= hoursDifference*1000*60*60
-            var minutesDifference = Math.floor(difference/1000/60);
-            difference -= minutesDifference*1000*60
-            var secondsDifference = Math.floor(difference/1000);
+                var $timer = $("#current-time");
+                $timer.empty();
 
+                var difference = remainTime;
+                var daysDifference = Math.floor(difference/1000/60/60/24);
+                difference -= daysDifference*1000*60*60*24
+                var hoursDifference = Math.floor(difference/1000/60/60);
+                difference -= hoursDifference*1000*60*60
+                var minutesDifference = Math.floor(difference/1000/60);
+                difference -= minutesDifference*1000*60
+                var secondsDifference = Math.floor(difference/1000);
 
-                $winner.append( "<p><b>Remaining time : "+ minutesDifference + ":"+secondsDifference);
+                if (secondsDifference < 10) {
+                    secondsDifference = "0"+secondsDifference;
+                }
+                $timer.append( "<p><b>Remaining time : "+ minutesDifference + ":"+secondsDifference);
             } 
             else {
+                $('#view').hide();
+                $('#end-of-game').show();
+                var $winner = $("#winner");
+                $winner.empty();
                 this.world.updateScoring(true);
                 var players = this.world.players.sortBy(function(p) { return -p.get('score'); });
                 $winner.append( "<p><b>Winner: "+players[0].get('name')+"</b> ("+players[0].get('score')+")</p>" );
