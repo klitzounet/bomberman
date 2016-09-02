@@ -94,7 +94,8 @@ var Server = Backbone.Model.extend({
                 gamesList[games[i].title] = {
                     type: games[i].type,
                     count: games[i].countersPlayer,
-                    size: games[i].size
+                    size: games[i].size,
+                    mode: games[i].mode,
                 }
             }
 
@@ -110,7 +111,7 @@ var Server = Backbone.Model.extend({
 
             this._createNewGame({
                 type: d.type || 'free',
-                size: d.size || 'regular',
+                size: d.size || 'M',
                 mode: d.mode || 'timeless'
             });
 
