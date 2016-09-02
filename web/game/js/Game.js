@@ -21,7 +21,8 @@ define([
 
             this.world = new World({
                 container: $("#view"),
-                mapSize: opt.mapSize
+                mapSize: opt.mapSize,
+                mapType: opt.mapType
             });
 
             // create our player

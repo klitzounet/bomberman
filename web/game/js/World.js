@@ -3,7 +3,7 @@
 define([
     "jquery", "underscore", "backbone",
 
-    "Map",
+    "MapFactory",
     "Bomb",
     "Flame",
     "Character",
@@ -90,7 +90,9 @@ define([
         initialize: function(opt) {
             this.$container = opt.container;
 
-            this.map = new Map();
+            this.map = new MapFactory().createMap(opt.mapType, {
+                size: opt.mapSize
+            });
 
             this.players.on('add', this.onCharacterAdded, this);
             this.players.on('remove', this.onCharacterRemoved, this);
@@ -102,7 +104,8 @@ define([
 
             this.canvas = new GameCanvas({
                 world: this,
-                mapSize: opt.mapSize
+                size: this.map.getSize(),
+                img: this.map.getImgSource()
             });
         },
 

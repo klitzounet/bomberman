@@ -51,7 +51,7 @@ var Server = Backbone.Model.extend({
 
         var game = new Game({
             redis: redis,
-            type: opt.type || 'free',
+            type: opt.type || 'default',
             mode: opt.mode || 'timeless',
             size: opt.size || 'm',
             title: 'game' + games.length
@@ -110,7 +110,7 @@ var Server = Backbone.Model.extend({
             console.log('create new game :', d);
 
             this._createNewGame({
-                type: d.type || 'free',
+                type: d.type || 'default',
                 size: d.size || 'M',
                 mode: d.mode || 'timeless'
             });

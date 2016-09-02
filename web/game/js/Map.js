@@ -21,10 +21,15 @@ define([
 
 
 
-        initialize: function() {
+        initialize: function(opt) {
             this.on('change', this.onChange, this);
 
             this.dirtMap = [];
+
+            this.mapSize = {
+                h : opt.size.h,
+                w : opt.size.w,
+            };
         },
 
         onChange: function() {
@@ -84,6 +89,18 @@ define([
         setTile: function(x, y, c) {
             var ix = (y - this.y) * this.w + (x - this.x);
             this.map = this.map.substr(0, ix) + c + this.map.substr(ix+1);
+        },
+
+        getImgSource: function(){
+            return {
+                tiles: 'res/default-tiles.png',
+                bombs: 'res/bombs.png',
+                flames: 'res/flames.png'
+            }
+        },
+
+        getSize:function(){
+            return this.mapSize;
         }
     });
 

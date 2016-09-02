@@ -27,8 +27,8 @@ define([
 
             // canvas
 
-            VIEW_W = opt.mapSize.w || 30;
-            VIEW_H = opt.mapSize.h || 15;
+            VIEW_W = opt.size.w || 30;
+            VIEW_H = opt.size.h || 15;
 
             this.$canvas = this._canvas(VIEW_W * SQUARE_SIZE, VIEW_H * SQUARE_SIZE);
             this.ctx = this.$canvas.get(0).getContext("2d");
@@ -46,11 +46,11 @@ define([
                 this.sprCharacters[c] = this._loadSprite("res/char-"+c+".png");
             }, this));
 
-            this.sprFlames = this._loadSprite('res/flames.png');
+            this.sprFlames = this._loadSprite(opt.img.flames);
 
-            this.sprBomb = this._loadSprite('res/bombs.png');
+            this.sprBomb = this._loadSprite(opt.img.bombs);
 
-            this.sprTiles = this._loadSprite('res/tiles.png');
+            this.sprTiles = this._loadSprite(opt.img.tiles);
         },
 
         _canvas: function(w, h) {

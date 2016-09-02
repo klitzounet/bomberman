@@ -136,27 +136,32 @@
 
                 .left-side{
                     display: inline-block;
-                    width: 45%;
+                    width: 50%;
                     height: 100%;
                     vertical-align: middle;
                 }
 
                 .right-side{
                     display: inline-block;
-                    width: 55%;
+                    width: 50%;
                     height: 100%;
                     vertical-align: middle;
                     font-size: 14px;
                 }
 
                 .map-type {
-                    width: calc(100% - 12px);
+                    width: calc(100% - 7px);
                     height: 50%;
-                    margin: 10px 0px 10px 10px;
+                    margin: 5px 0px 10px 5px;
                     border: 1px solid black;
 
-                    &.free {
-                        background: url('../res/mode-arena.png');
+                    &.default {
+                        background: url('../res/default-arena.png');
+                        background-size: 100% 100%;
+                    }
+
+                    &.frozen {
+                        background: url('../res/frozen-arena.png');
                         background-size: 100% 100%;
                     }
 
