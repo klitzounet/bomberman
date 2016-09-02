@@ -5,10 +5,6 @@ define([
 
 ],function($, _, Backbone, core) {
 
-
-    var TILE_SIZE = 16;
-
-
     Map = Backbone.Model.extend({
         defaults: {
             map: null,

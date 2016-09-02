@@ -18,6 +18,8 @@ define([
     var VIEW_W = 30;
     var VIEW_H = 15;
 
+    var SCALE_FACTOR = 1.25;
+
     GameCanvas = Backbone.View.extend({
 
         initialize: function(opt) {
@@ -32,6 +34,7 @@ define([
 
             this.$canvas = this._canvas(VIEW_W * SQUARE_SIZE, VIEW_H * SQUARE_SIZE);
             this.ctx = this.$canvas.get(0).getContext("2d");
+            this.ctx.scale(SCALE_FACTOR,SCALE_FACTOR);
 
             this.world.$container.append(this.$canvas);
 
@@ -54,7 +57,7 @@ define([
         },
 
         _canvas: function(w, h) {
-            var $canvas = $('<canvas width="'+w+'" height="'+h+'"/>');
+            var $canvas = $('<canvas width="'+ w*SCALE_FACTOR +'" height="'+ h*SCALE_FACTOR +'"/>');
 
             // Has canvas support?
             if ($canvas.get(0).getContext == undefined)
