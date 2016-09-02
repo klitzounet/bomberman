@@ -45,7 +45,7 @@ define([
 
             // load sprites
             this.sprCharacters = {};
-            _.each(['john','joe','betty','mary'], _.bind(function(c) {
+            _.each(['john','joe','betty','mary','titi'], _.bind(function(c) {
                 this.sprCharacters[c] = this._loadSprite("res/char-"+c+".png");
             }, this));
 

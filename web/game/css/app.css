@@ -155,7 +155,7 @@ a:hover {
   font-size: 20px;
   color: #2073c0;
   padding: 8px;
-  width: 250px;
+  width: 260px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -197,6 +197,9 @@ a:hover {
 }
 #lobby .character-select .mary {
   background-image: url("../res/char-mary.png");
+}
+#lobby .character-select .titi {
+  background-image: url("../res/char-titi.png");
 }
 #lobby .character-select .frame0 .selected div {
   background-position: 0 0;

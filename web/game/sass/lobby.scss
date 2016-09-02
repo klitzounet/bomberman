@@ -65,7 +65,7 @@
             font-size: 20px;
             color: #2073c0;
             padding: 8px;
-            width: 250px;
+            width: 260px;
             @include border-radius(2px);
         }
 
@@ -99,6 +99,7 @@
         .joe   { background-image: url('../res/char-joe.png'); }
         .betty { background-image: url('../res/char-betty.png'); }
         .mary  { background-image: url('../res/char-mary.png'); }
+        .titi  { background-image: url('../res/char-titi.png'); }
 
         .frame0 .selected div { background-position: 0 0; }
         .frame1 .selected div { background-position: -22px 0; }
