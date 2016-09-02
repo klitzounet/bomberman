@@ -7,7 +7,11 @@ define([
 
 
     var TILE_SIZE = 16;
-
+    var LEFT = 37;
+    var UP = 38;
+    var RIGHT = 39;
+    var DOWN = 40;
+    var SPACE = 32;
 
     Map = Backbone.Model.extend({
         defaults: {
@@ -101,7 +105,20 @@ define([
 
         getSize:function(){
             return this.mapSize;
+        },
+
+        getMove: function(keymap, speed, currentPosition) {
+            var dx = 0;
+
+            var dy = 0;
+            if (keymap[LEFT])   dx-=speed;
+            if (keymap[RIGHT])  dx+=speed;
+            if (keymap[UP])     dy-=speed;
+            if (keymap[DOWN])   dy+=speed;
+
+            return {dx: dx, dy: dy};
         }
+
     });
 
 

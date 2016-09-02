@@ -81,21 +81,23 @@ define([
 
             var speed = delta * this.me.get('speed');
             if (speed > PLAYER_MAX_SPEED) speed = PLAYER_MAX_SPEED;
-            var dx = 0;
 
-            var dy = 0;
-            // handle input
-            if (keymap[LEFT])   dx-=speed;
-            if (keymap[RIGHT])  dx+=speed;
-            if (keymap[UP])     dy-=speed;
-            if (keymap[DOWN])   dy+=speed;
-
+            var currentPosition = {
+                x: this.me.get('x'),
+                y: this.me.get('y')
+            };
+            
+            var moveResult = this.world.map.getMove(keymap, speed, currentPosition);
+            var dx = moveResult.dx;
+            var dy = moveResult.dy;
+          
             if (this.me.get('invertDirections') ) {
                 dx = -dx;
                 dy = -dy;
             }
-
-            var moving = keymap[LEFT] || keymap[RIGHT] || keymap[UP] || keymap[DOWN];
+            var moving = (dx !== 0 || dy !== 0);
+            //var moving = true;//((dx <= -0.005 && dx >= 0.005) || (dy <= -0.005 && dy >= 0.005) || keymap[LEFT] || keymap[RIGHT] || keymap[UP] || keymap[DOWN]);
+            //var moving = keymap[LEFT] || keymap[RIGHT] || keymap[UP] || keymap[DOWN];
 
             if (moving)
                 this.requestMove(dx, dy);
