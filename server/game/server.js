@@ -54,7 +54,8 @@ var Server = Backbone.Model.extend({
             type: opt.type || 'free',
             mode: opt.mode || 'timeless',
             size: opt.size || 'm',
-            title: 'game' + games.length
+            title: 'game' + games.length,
+            onGameEndCB: this._deleteGame.bind(this,'game' + games.length)
         });
 
         game.bombs.on('remove',  _.bind(this.onBombRemoved, this, game));

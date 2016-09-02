@@ -27,6 +27,7 @@
             this.type = opt.type;
             this.mode = opt.mode;
             this.size = opt.size;
+            this.onGameEndCB = opt.onGameEndCB;
             this.timeLimited = (this.mode === "timelimited") ? true : false;//(typeof opt.timeLimited !== 'undefined') ? (opt.timeLimited) : (true);
 
             this.playersById = {};
@@ -63,6 +64,10 @@
 
             if (this.gameMaxTime + this.timeStart <= now && this.timeLimited) {
                 this.endpoint.emit('end-of-game', null);
+                if (this.onGameEndCB) {
+                   this.onGameEndCB(); 
+                }
+                
                 return;
             }
             else if (this.timeLimited) {
