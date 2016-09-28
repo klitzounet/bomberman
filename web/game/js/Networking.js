@@ -119,7 +119,7 @@ define([
                 initialized: true
             });
             this.world.map.setDirty();
-            console.log("full map update");
+            //console.log("full map update");
         },
 
         onPlayerJoined: function(d) {

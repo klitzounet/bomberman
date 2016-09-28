@@ -366,8 +366,8 @@ define([
             this.mapDirts = [];
             this.mapRepaint = false;
 
-            if (drawnTiles > 0)
-                console.log("drawn " + drawnTiles);
+            /*if (drawnTiles > 0)
+                console.log("drawn " + drawnTiles);*/
 
             // FIXME
             this.ctx.drawImage(this.map,
