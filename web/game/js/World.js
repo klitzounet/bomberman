@@ -139,7 +139,8 @@ define([
                     if (this.map.getTile(fx, fy) != 0)
                         return; // stop on obstacle
 
-                    this.addMergeFlame(fx, fy, i == strength ? o.e : o.d, owner);
+                    //this.addMergeFlame(fx, fy, i == strength ? o.e : o.d, owner);
+                    this.addMergeFlame(fx, fy, i == strength ? (o.e || 0) : o.d, owner);
 
                     if (o.d == 0) return; // special case for center
                 }
