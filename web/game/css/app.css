@@ -234,6 +234,7 @@ a:hover {
   margin-top: 10px;
   color: black;
   font-size: 16px;
+  cursor: pointer;
 }
 #lobby .games #games-list .game-mode:hover {
   background-color: #ffffff;

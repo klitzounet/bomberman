@@ -140,6 +140,8 @@
         },
 
         generateBonus: function (explodedBlocks) {
+			// sum of above values must be 1 !
+			// chance to have no bonus : 0.40
             var bonus = [{
                 name: 'speed',
                 prob: 0.15
@@ -151,7 +153,7 @@
                 prob: 0.15
             },{
                 name: 'death',
-                prob: 0.2
+                prob: 0.15
             }];
             
             var generatedBonus = [];

@@ -36,7 +36,7 @@ var Server = Backbone.Model.extend({
 
         io.set('log level', 1);
 
-        //this._createNewGame();
+        this._createNewGame();
 
         this.lobby = io.of('/lobby');
         this.lobby.on('connection', _.bind(this.lobbyConnection, this));
@@ -53,7 +53,7 @@ var Server = Backbone.Model.extend({
             redis: redis,
             type: opt.type || 'default',
             mode: opt.mode || 'timeless',
-            size: opt.size || 'm',
+            size: opt.size || 'M',
             title: 'game' + games.length,
             onGameEndCB: this._deleteGame.bind(this,'game' + games.length)
         });
