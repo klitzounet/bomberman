@@ -12,6 +12,13 @@ define([
     var RIGHT = 39;
     var DOWN = 40;
     var SPACE = 32;
+    var CTRL = 17;
+    var SHIFT = 16;
+    var ALT = 18;
+    var ESCAPE = 27;
+    var ENTER = 13;
+    var BACKSPACE = 8;
+    var F5 = 116;
 
     //var PLAYER_MOVE_SPEED = 5; // moved to Character.speed
     var PLAYER_MAX_SPEED = 0.9;
@@ -51,7 +58,7 @@ define([
                 e.preventDefault();
             }
 
-            if (e.keyCode == 13) {
+            if (e.keyCode === ENTER) {
                 if (this.$chatbox.is(":focus")) {
                     this.$chatbox.blur();
                     this.$console.animate({
@@ -69,7 +76,11 @@ define([
                     this.$chatbox.focus();
                     inChat = true;
                 }
-            }
+            }else if(e.keyCode === SHIFT){
+				this.world.canvas.drawCharactersNames = !this.world.canvas.drawCharactersNames;
+            }else if(e.keyCode === F5){
+				location.reload();
+			}
         },
 
         onKeyUp: function(e) {

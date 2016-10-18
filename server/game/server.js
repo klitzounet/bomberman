@@ -36,7 +36,7 @@ var Server = Backbone.Model.extend({
 
         io.set('log level', 1);
 
-        this._createNewGame();
+        this._createNewGame({ name: 'Quick play' });
 
         this.lobby = io.of('/lobby');
         this.lobby.on('connection', _.bind(this.lobbyConnection, this));
@@ -51,9 +51,10 @@ var Server = Backbone.Model.extend({
 
         var game = new Game({
             redis: redis,
+            name: opt.name || '',
             type: opt.type || 'default',
-            mode: opt.mode || 'timeless',
             size: opt.size || 'M',
+            mode: opt.mode || 'timeless',
             title: 'game' + games.length,
             onGameEndCB: this._deleteGame.bind(this,'game' + games.length)
         });
@@ -93,6 +94,7 @@ var Server = Backbone.Model.extend({
 
             for(var i=0;i<games.length;i++){
                 gamesList[games[i].title] = {
+                    name: games[i].name,
                     type: games[i].type,
                     count: games[i].countersPlayer,
                     size: games[i].size,
@@ -111,6 +113,7 @@ var Server = Backbone.Model.extend({
             console.log('create new game :', d);
 
             this._createNewGame({
+                name: d.name || '',
                 type: d.type || 'default',
                 size: d.size || 'M',
                 mode: d.mode || 'timeless'
@@ -132,6 +135,7 @@ var Server = Backbone.Model.extend({
 
             for(var i=0;i<games.length;i++){
                 if(games[i].title === d.game){
+                    params['name'] = games[i].name;
                     params['type'] = games[i].type;
                     params['mode'] = games[i].mode;
                     params['mapSize'] = {

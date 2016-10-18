@@ -24,6 +24,7 @@
             this.redis = opt.redis;
 
             this.title = opt.title;
+            this.name = opt.name;
             this.type = opt.type;
             this.mode = opt.mode;
             this.size = opt.size;
@@ -34,7 +35,7 @@
             this.ctrlsById = {};
             this.maxPlayerId = 0;
             this.timeStart = getTicks();
-            this.gameMaxTime =  300 * 1000; // max game time 300 seconds = 5mn
+            this.gameMaxTime =  240 * 1000; // max game time 300 seconds = 5mn
 
             this.countersPlayer = 0;
 

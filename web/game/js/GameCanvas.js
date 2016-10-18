@@ -35,6 +35,9 @@ define([
             this.$canvas = this._canvas(VIEW_W * SQUARE_SIZE, VIEW_H * SQUARE_SIZE);
             this.ctx = this.$canvas.get(0).getContext("2d");
             this.ctx.scale(SCALE_FACTOR,SCALE_FACTOR);
+			
+			this.ctx.textAlign = "center"; 
+			this.ctx.fillStyle = "white";
 
             this.world.$container.append(this.$canvas);
 
@@ -54,6 +57,8 @@ define([
             this.sprBomb = this._loadSprite(opt.img.bombs);
 
             this.sprTiles = this._loadSprite(opt.img.tiles);
+			
+			this.drawCharactersNames = false;
         },
 
         _canvas: function(w, h) {
@@ -141,9 +146,14 @@ define([
 
             var spr = this.sprCharacters[c.get('character')];
 
-            if (framey < 8)
+            if (framey < 8){
                 this.ctx.drawImage(spr, framex * CHAR_W, framey*CHAR_H, CHAR_W, CHAR_H,
-                    x, y, CHAR_H, CHAR_H);
+                    x, y, CHAR_W, CHAR_H);
+					
+				if(this.drawCharactersNames){
+					this.ctx.fillText(c.get('name'), x + CHAR_W/2, y - 3);
+				}
+			}
         },
 
         drawFlame: function(f) {

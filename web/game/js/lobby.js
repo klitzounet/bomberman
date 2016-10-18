@@ -150,6 +150,7 @@ define([
         * Create a new game on server
         */
         createGame: function(){
+            var name = $('#name-map').val();
             var type = $('#type-map').val();
             var size = $('#size-map').val();
             var mode = $('#game-mode').val();
@@ -157,6 +158,7 @@ define([
 
             console.log('create: ', type, size, mode);
             this.lobby.emit("create-game", {
+                name: name,
                 type: type,
                 size: size,
                 mode: mode
@@ -181,16 +183,18 @@ define([
                                 '</div>)');*/
 
     var gameTemplate = _.template('<div class="game-mode">'+
+	
+									'<p class="title-game"><%= name %></p>'+
 
                                     '<div class="left-side">'+
                                         '<div class="map-type <%= type %>"></div>' +
-                                        '<div class="counter"><%= count %> player(s)</div>' +
+                                        '<div class="counter"><%= count %> player<% if (count > 1) { %>s<% } %></div>' +
                                     '</div>' +
 
                                     '<div class="right-side">'+
                                         '<div class="label">Map:</div>' +
                                         '<div class="value"><%= type %> (<%= size %>)</div>' +
-
+                                        '<br />' +
                                         '<div class="label">Mode:</div>' +
                                         '<div class="value"><%= mode %></div>' +
                                     '</div>' +
