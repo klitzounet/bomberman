@@ -28,6 +28,7 @@
             this.type = opt.type;
             this.mode = opt.mode;
             this.size = opt.size;
+			this.duration = opt.duration ? parseFloat(opt.duration) : 4; // in minutes
             this.onGameEndCB = opt.onGameEndCB;
             this.timeLimited = (this.mode === "timelimited") ? true : false;//(typeof opt.timeLimited !== 'undefined') ? (opt.timeLimited) : (true);
 
@@ -35,7 +36,7 @@
             this.ctrlsById = {};
             this.maxPlayerId = 0;
             this.timeStart = getTicks();
-            this.gameMaxTime =  240 * 1000; // max game time 300 seconds = 5mn
+            this.gameMaxTime = this.duration * 60 * 1000; // max game time in milliseconds (300s = 5min)
 
             this.countersPlayer = 0;
 
@@ -48,7 +49,7 @@
 
             // TODO move outside game
             this.lastTick = getTicks();
-            setInterval(_.bind(this.update, this), 100);
+            this.updateIntervalId = setInterval(_.bind(this.update, this), 100);
 
             // map updates
             setInterval(_.bind(function() {
@@ -64,11 +65,11 @@
             var now = getTicks();
 
             if (this.gameMaxTime + this.timeStart <= now && this.timeLimited) {
+				clearInterval(this.updateIntervalId);
                 this.endpoint.emit('end-of-game', null);
                 if (this.onGameEndCB) {
                    this.onGameEndCB(); 
-                }
-                
+                }                
                 return;
             }
             else if (this.timeLimited) {

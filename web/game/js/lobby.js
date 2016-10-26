@@ -46,6 +46,7 @@ define([
             "click .character li": "selectCharacter",
             "click .game-mode": "startGame",
             "click .create-game-btn": "createGame",
+            "change #game-mode": "changeGameMode",
         },
 
         selectCharacter: function(e) {
@@ -76,12 +77,32 @@ define([
 
         onGamesList: function(games) {
             var gamesList = $('#games-list').empty();
-
+			var quickStartBtn = $('.quick-start').first();
+			
+			// quick start
+			if(games['game0']){ 
+				quickStartBtn.data("game", 'game0');
+			}
+			
             _.each(games, function(game, key) {
-                var i = $(gameTemplate(game));
-                i.data("game", key);
-                gamesList.append(i);
+				if(key !== 'game0'){
+					var div = $(gameTemplate(game));
+					div.data("game", key);
+					gamesList.append(div);
+				}
             });
+        },
+
+        changeGameMode: function(e) {
+            if(e.target.value === "timelimited"){
+				$('.param-time-limited').each(function(){
+					$(this).removeClass('hidden');
+				});
+			}else{
+				$('.param-time-limited').each(function(){
+					$(this).addClass('hidden');
+				});
+			}
         },
 
         initUsername: function() {
@@ -150,10 +171,11 @@ define([
         * Create a new game on server
         */
         createGame: function(){
-            var name = $('#name-map').val();
+            var name = _.escape($('#name-map').val());
             var type = $('#type-map').val();
             var size = $('#size-map').val();
             var mode = $('#game-mode').val();
+            var duration = $('#duration').val();
 
 
             console.log('create: ', type, size, mode);
@@ -161,7 +183,8 @@ define([
                 name: name,
                 type: type,
                 size: size,
-                mode: mode
+                mode: mode,
+				duration: duration
             });
         },
 

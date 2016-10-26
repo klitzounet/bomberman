@@ -27,10 +27,18 @@
                 <!--<div class="fb-login-button" onlogin="fb.checkLogin();">Login</div>-->
             <!--</section>-->
         </div>
+
+		<article>
+			<p>Use:</p>
+			<p>- ARROW KEYS to move</p>
+			<p>- SPACE to place bombs</p>
+			<p>- SHIFT to display characters' names</p>
+		</article>   
     </div>
 
     <div class="right">
         <section class="games">
+			<span class="quick-start game-mode">Quick play &#8623;</span>
             <p>Select a game:</p>
 
             <div id="games-list">
@@ -43,7 +51,7 @@
 				
                     <div class="params">
                         <div class="label">Title</div>
-                        <input type="text" id="name-map" />
+                        <input type="text" id="name-map" maxlength="25" />
                     </div>
 					
                     <div class="params">
@@ -78,6 +86,12 @@
                             </select>
                         </div>
                     </div>
+					
+                    <div class="params param-time-limited hidden">
+                        <div class="label">Time</div>
+                        <input type="text" id="duration" placeholder="4" />
+                    </div>
+					
                 </div>
 
                 <div class="right-side">
@@ -87,13 +101,7 @@
             </div>
         </section>
     </div>
-
-    <article>
-		<p>Use:</p>
-		<p>- ARROW KEYS to move</p>
-		<p>- SPACE to place bombs</p>
-		<p>- SHIFT to display characters' names</p>
-    </article>   
+	
 </div>
 
 

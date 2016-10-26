@@ -55,6 +55,7 @@ var Server = Backbone.Model.extend({
             type: opt.type || 'default',
             size: opt.size || 'M',
             mode: opt.mode || 'timeless',
+			duration: opt.duration,
             title: 'game' + games.length,
             onGameEndCB: this._deleteGame.bind(this,'game' + games.length)
         });
@@ -99,6 +100,7 @@ var Server = Backbone.Model.extend({
                     count: games[i].countersPlayer,
                     size: games[i].size,
                     mode: games[i].mode,
+					duration: games[i].duration
                 }
             }
 
@@ -116,7 +118,8 @@ var Server = Backbone.Model.extend({
                 name: d.name || '',
                 type: d.type || 'default',
                 size: d.size || 'M',
-                mode: d.mode || 'timeless'
+                mode: d.mode || 'timeless',
+				duration: d.duration
             });
 
             socket.emit("create-game", {
@@ -142,6 +145,7 @@ var Server = Backbone.Model.extend({
                         w: games[i].map.getMap().w,
                         h: games[i].map.getMap().h
                     };
+					params['duration'] = games[i].duration;
                 }
             }
 
