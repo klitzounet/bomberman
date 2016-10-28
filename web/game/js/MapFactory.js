@@ -3,6 +3,7 @@ define([
 
     "Map",
     "MapFrozen",
+	"MapJungle"
 ],function($, _, Backbone, core) {
 
 	MapFactory = Backbone.Model.extend({
@@ -19,6 +20,9 @@ define([
 
 				case 'frozen': 
 					return new MapFrozen(options);
+					
+				case 'jungle': 
+					return new MapJungle(options);
 			}
 		}
 	});

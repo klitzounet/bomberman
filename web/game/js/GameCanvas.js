@@ -287,6 +287,7 @@ define([
         drawMap: function() {
 
             var map = this.world.map;
+		
 
             var mp = map.attributes;
             var vp = this.viewport;
@@ -318,7 +319,6 @@ define([
                     this.mapDirty();
                 }
                 else if (dx != 0 || dy != 0) {
-                    console.log(dx+":"+dy);
 
                     var ww = (vp.w) * SQUARE_SIZE;
                     var hh = (vp.h) * SQUARE_SIZE;
@@ -376,14 +376,16 @@ define([
             this.mapDirts = [];
             this.mapRepaint = false;
 
-            /*if (drawnTiles > 0)
-                console.log("drawn " + drawnTiles);*/
 
             // FIXME
             this.ctx.drawImage(this.map,
                 -ofx - SQUARE_SIZE,
                 -ofy - SQUARE_SIZE
             );
+			
+			if (map.drawMap) {
+				map.drawMap(ctx);
+			}
 
         }
 
