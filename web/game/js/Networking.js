@@ -104,9 +104,17 @@ define([
                 $winner.empty();
                 this.world.updateScoring(true);
                 var players = this.world.players.sortBy(function(p) { return -p.get('score'); });
-				var podium = '<p><img src="res/you-win.png" height="256" /><br /><br /><br /><p style="font-size:2.0em">Winner !</p><br /><p>' + players[0].get('name') + ' <span style="font-size: 0.85em;color: #e43159;">(' + players[0].get('score') + ' points)</span></p>'
-					+ '<br /><img src="res/you-lose.png" height="256" /><br />';
-				for(var i=1; i<players.length; i++){
+				var bestScore = players[0].get('score');
+				var podium = '<p><img src="res/you-win.png" height="256" /><br /><br /><br /><p style="font-size:2.0em">Winner !</p><br />';
+				// winners
+				var i=0;
+				while(players[i].get('score') === bestScore){
+					podium += '<p>' + players[0].get('name') + ' <span style="font-size: 0.85em;color: #e43159;">(' + players[0].get('score') + ' points)</span></p>';
+					i++;
+				}
+				podium += '<br /><img src="res/you-lose.png" height="256" /><br />';
+				// loosers
+				for(i; i<players.length; i++){
 					podium += '<p>' + players[i].get('name') + ' <span style="font-size: 0.85em;color: #e43159;">(' + players[i].get('score') + ' points)</span></p>';
 				}
                 $winner.append(podium);
