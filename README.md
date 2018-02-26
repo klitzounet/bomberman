@@ -38,6 +38,6 @@ Install
 
 # test git
 # hello world
-# print toto after vgd1 modif
+# hello from vgd1 :)
 # PULL REQUEST PENDING
 # edit after pull request
