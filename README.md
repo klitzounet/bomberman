@@ -38,6 +38,6 @@ Install
 
 # test git
 # hello world
-# hello from toto
+# hello from
 # PULL REQUEST PENDING
 # edit after pull request
