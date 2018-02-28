@@ -25,15 +25,19 @@ Install
 		npm update
 
 * Optional: install [Compass] (http://compass-style.org/install/)
- 
+
 		gem update --system
 		gem install compass
-	
+
 * Start server
 
 		node server/server.js
-		
+
 
 * Open a browser to `localhost:8181` and enjoy!
 
-
+# test git
+# hello world
+# hello from
+# PULL REQUEST PENDING
+# edit after pull request
